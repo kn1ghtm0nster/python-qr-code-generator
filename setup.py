@@ -14,7 +14,7 @@ setup(
     ],
     entry_points={
         "console_scripts": [
-            "qr=qr_generator.cli:main",
+            "qr-gen=qr_generator.cli:main",
         ],
     },
 )
