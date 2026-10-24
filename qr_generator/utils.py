@@ -84,3 +84,30 @@ def validate_output_path(output_path: str) -> None:
             parent.mkdir(parents=True, exist_ok=True)
         except Exception as e:
             raise ValueError(f"Cannot create output directory: {parent}") from e
+
+
+def get_default_output_path(qr_type: str) -> str:
+    """
+    Get the default output path for a given QR code type.
+    
+    Args:
+        qr_type: Type of QR code ("simple", "wifi", or "vcard")
+    
+    Returns:
+        Default output path for the specified QR code type
+    
+    Raises:
+        ValueError: If qr_type is not one of the valid types
+    """
+    default_paths = {
+        "simple": "qr_codes/simple/qrcode.png",
+        "wifi": "qr_codes/wifi/wifi_qrcode.png",
+        "vcard": "qr_codes/vcard/vcard_qrcode.png",
+    }
+    
+    if qr_type not in default_paths:
+        raise ValueError(
+            f"Invalid QR type: {qr_type}. Must be one of {list(default_paths.keys())}"
+        )
+    
+    return default_paths[qr_type]

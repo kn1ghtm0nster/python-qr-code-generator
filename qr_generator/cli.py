@@ -31,7 +31,6 @@ def simple(data: str, output: str, size: int, error_correction: str):
     try:
         if output:
             validate_output_path(output)
-        
         result_path = generate_simple_qr(data, output_path=output, size=size,
                                         error_correction=error_correction)
         click.echo(f"[OK] QR code saved to: {result_path}")

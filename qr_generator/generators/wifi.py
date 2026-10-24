@@ -1,7 +1,7 @@
 """WiFi QR code generator for network sharing."""
 
 from typing import Optional, Literal
-from qr_generator.utils import generate_qr_code, save_qr_code
+from qr_generator.utils import generate_qr_code, save_qr_code, get_default_output_path
 
 
 def generate_wifi_qr(ssid: str, password: str, security: str = "WPA",
@@ -38,12 +38,12 @@ def generate_wifi_qr(ssid: str, password: str, security: str = "WPA",
     ssid = ssid.strip()
     password = password.strip() if password else ""
     
+    if output_path is None:
+        output_path = get_default_output_path("wifi")
+    
     # WiFi QR code format: WIFI:T:security;S:ssid;P:password;H:hidden;;
     hidden_str = "true" if hidden else "false"
     wifi_string = f'WIFI:T:{security};S:{ssid};P:{password};H:{hidden_str};;'
-    
-    if output_path is None:
-        output_path = "wifi_qrcode.png"
     
     qr = generate_qr_code(wifi_string, size=size, error_correction=error_correction)
     return save_qr_code(qr, output_path)
