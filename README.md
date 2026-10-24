@@ -24,16 +24,18 @@ cd python-qr-code-generator
 pip install -e .
 ```
 
-This installs the `qr` CLI command globally, along with all dependencies (qrcode, Pillow, Click).
+This installs the `qr-gen` CLI command in the active Python environment, along with all dependencies (qrcode, Pillow, Click).
 
 ## Usage
 
+After installing the project with `pip install -e .`, the CLI command is `qr-gen`.
+
 ### Basic Help
 ```bash
-qr --help                 # Show main help
-qr simple --help          # Show simple command help
-qr wifi --help            # Show WiFi command help
-qr vcard --help           # Show vCard command help
+qr-gen --help                 # Show main help
+qr-gen simple --help          # Show simple command help
+qr-gen wifi --help            # Show WiFi command help
+qr-gen vcard --help           # Show vCard command help
 ```
 
 ### Simple QR Codes
@@ -42,16 +44,16 @@ Generate a QR code for a URL or text:
 
 ```bash
 # Basic usage (outputs to qrcode.png)
-qr simple "https://github.com"
+qr-gen simple "https://github.com"
 
 # Custom output file
-qr simple "Hello World" -o greeting.png
+qr-gen simple "Hello World" -o greeting.png
 
 # Custom size (larger box size = bigger image)
-qr simple "https://example.com" --size 15
+qr-gen simple "https://example.com" --size 15
 
 # High error correction (allows more damage recovery)
-qr simple "Data" --error-correction H
+qr-gen simple "Data" --error-correction H
 ```
 
 **Options:**
@@ -65,16 +67,16 @@ Generate a shareable WiFi QR code:
 
 ```bash
 # Interactive mode (prompts for input)
-qr wifi
+qr-gen wifi
 
 # Non-interactive mode with flags
-qr wifi -s "MyNetwork" -p "Password123" -t WPA -o wifi.png
+qr-gen wifi -s "MyNetwork" -p "Password123" -t WPA -o wifi.png
 
 # Open network (no password)
-qr wifi -s "FreeWiFi" -t NOPASS -o open_wifi.png
+qr-gen wifi -s "FreeWiFi" -t NOPASS -o open_wifi.png
 
 # Hidden network
-qr wifi -s "SecretNetwork" -p "Secret123" --hidden
+qr-gen wifi -s "SecretNetwork" -p "Secret123" --hidden
 ```
 
 **Options:**
@@ -92,16 +94,16 @@ Generate a contact card QR code:
 
 ```bash
 # Interactive mode
-qr vcard
+qr-gen vcard
 
 # Non-interactive mode
-qr vcard -n "John Doe" -p "+1-555-0100" -e "john@example.com" -c "Acme Corp" -o contact.png
+qr-gen vcard -n "John Doe" -p "+1-555-0100" -e "john@example.com" -c "Acme Corp" -o contact.png
 
 # Minimal vCard (name only)
-qr vcard -n "Jane Smith"
+qr-gen vcard -n "Jane Smith"
 
 # Full contact information
-qr vcard \
+qr-gen vcard \
   -n "Alice Johnson" \
   -p "+1-555-0200" \
   -e "alice@example.com" \
@@ -152,17 +154,17 @@ Higher correction levels create larger QR codes but allow them to remain readabl
 
 ### Generate GitHub profile QR code:
 ```bash
-qr simple "https://github.com/username" -o github.png
+qr-gen simple "https://github.com/username" -o github.png
 ```
 
 ### Share home WiFi:
 ```bash
-qr wifi -s "HomeNetwork" -p "MySecurePassword123" -o home_wifi.png
+qr-gen wifi -s "HomeNetwork" -p "MySecurePassword123" -o home_wifi.png
 ```
 
 ### Create business card QR code:
 ```bash
-qr vcard \
+qr-gen vcard \
   -n "Robert Smith" \
   -p "+1-555-0300" \
   -e "robert@company.com" \
