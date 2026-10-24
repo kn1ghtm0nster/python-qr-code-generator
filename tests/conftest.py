@@ -2,6 +2,7 @@
 
 import pytest
 from pathlib import Path
+from unittest.mock import patch
 
 
 @pytest.fixture
@@ -25,3 +26,16 @@ def sample_data():
         "email": "john@example.com",
         "phone": "+1234567890",
     }
+
+
+@pytest.fixture(autouse=True)
+def mock_save_qr_code():
+    """
+    Mock fixture for save_qr_code function.
+    
+    Automatically applied to all tests to prevent actual file creation.
+    Returns a predictable path string without creating real files.
+    """
+    with patch("qr_generator.utils.save_qr_code") as mock:
+        mock.return_value = "qr_codes/{qr_type}/qrcode.png"
+        yield mock

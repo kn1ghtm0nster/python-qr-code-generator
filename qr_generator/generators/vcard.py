@@ -1,7 +1,7 @@
 """vCard QR code generator for contact information."""
 
 from typing import Optional
-from qr_generator.utils import generate_qr_code, save_qr_code
+from qr_generator.utils import generate_qr_code, save_qr_code, get_default_output_path
 
 
 def generate_vcard_qr(name: str, phone: Optional[str] = None, email: Optional[str] = None,
@@ -66,7 +66,7 @@ def generate_vcard_qr(name: str, phone: Optional[str] = None, email: Optional[st
     vcard_string = "\n".join(vcard_lines)
     
     if output_path is None:
-        output_path = "vcard_qrcode.png"
+        output_path = get_default_output_path("vcard")
     
     qr = generate_qr_code(vcard_string, size=size, error_correction=error_correction)
     return save_qr_code(qr, output_path)
